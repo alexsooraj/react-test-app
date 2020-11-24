@@ -1,15 +1,19 @@
-export class AuthUtil {
-  private static _isLoggedIn: boolean = false;
+import { User } from "../models/User";
 
-  public static get isLoggedIn(): boolean {
-    // return localStorage.getItem("jwt") !== undefined && this._isLoggedIn;
-    return true;
+export class AuthUtil {
+  static isLoggedIn(): boolean {
+    return localStorage.getItem("userData") !== null;
   }
 
-  public static set isLoggedIn(value: boolean) {
-    this._isLoggedIn = value;
-    if (!value) {
-      localStorage.clear();
-    }
+  static getUserData(): User {
+    return JSON.parse(localStorage.getItem('userData') as any) as User;
+  }
+
+  static setUserData(user: User) {
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  static clearUserData() {
+    localStorage.removeItem('userData');
   }
 }

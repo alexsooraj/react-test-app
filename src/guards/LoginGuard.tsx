@@ -8,7 +8,7 @@ const LoginGuard: React.FC<RouteProps> = ({ component: Component, ...rest }) => 
         <Route
             {...rest}
             render={(props: any) =>
-                !AuthUtil.isLoggedIn ? (<Component {...props} />) : (<Redirect to="/" />)}
+                !AuthUtil.isLoggedIn() ? (<Component authState={(rest as any).authState} {...props} />) : (<Redirect to="/" />)}
         />
     );
 };

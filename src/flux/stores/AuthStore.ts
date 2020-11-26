@@ -7,6 +7,7 @@ import { AuthUtil } from "../../utils/AuthUtil";
 import { AuthActions } from "../actions/AuthActions";
 import { AuthActionTypes } from "../actions/AuthActionTypes";
 import AppDispatcher from "../dispatcher/AppDispatcher";
+import produce from 'immer';
 
 class AuthStore extends ReduceStore<AuthData, Action> {
     constructor() {
@@ -25,35 +26,31 @@ class AuthStore extends ReduceStore<AuthData, Action> {
         switch (action.type) {
             case AuthActionTypes.LOGIN_USER: {
                 this.login(action.payload.userId, action.payload.password);
-                return {
-                    ...state,
-                    isAuthenticating: true,
-                    authErrorMsg: undefined
-                }
+                return produce(state, dState => {
+                    dState.isAuthenticating = true;
+                    dState.authErrorMsg = undefined;
+                });
             }
             case AuthActionTypes.LOGGED_IN: {
                 AuthUtil.setUserData(action.payload);
-                return {
-                    ...state,
-                    isAuthenticating: false,
-                    currentUser: AuthUtil.getUserData(),
-                    authErrorMsg: undefined
-                };
+                return produce(state, dState => {
+                    dState.isAuthenticating = false;
+                    dState.currentUser = AuthUtil.getUserData();
+                    dState.authErrorMsg = undefined;
+                });
             }
             case AuthActionTypes.LOGIN_FAILED: {
                 alert(action.payload.errorMsg);
-                return {
-                    ...state,
-                    isAuthenticating: false,
-                    authErrorMsg: action.payload.errorMsg
-                };
+                return produce(state, dState => {
+                    dState.isAuthenticating = false;
+                    dState.authErrorMsg = action.payload.errorMsg;
+                });
             }
             case AuthActionTypes.LOGOUT: {
                 AuthUtil.clearUserData();
-                return {
-                    ...state,
-                    currentUser: undefined
-                }
+                return produce(state, dState => {
+                    dState.currentUser = undefined;
+                });
             }
             default:
                 return state;

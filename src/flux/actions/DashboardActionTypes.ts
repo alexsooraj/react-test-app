@@ -1,0 +1,4 @@
+export enum DashboardActionTypes {
+    LOAD_GRAPH_DATA = 'LOAD_GRAPH_DATA',
+    LOAD_GRAPH_DATA_COMPLETED = 'LOAD_GRAPH_DATA_COMPLETED'
+}

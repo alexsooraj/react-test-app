@@ -8,4 +8,9 @@ export class APIUtil {
         }
         return result.data;
     }
+
+    static get = async (url: string) => {
+        const result = await axios.get(url);
+        return result.data;
+    }
 }

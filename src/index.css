@@ -1,3 +1,7 @@
 .form-group > input {
     width: 100%;
 }
+
+.pointer-link {
+    cursor: pointer;
+}

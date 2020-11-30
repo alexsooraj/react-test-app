@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import { DashboardActions } from '../../flux/actions/DashboardActions';
 import './dashboard.css';
+import { useHistory } from 'react-router-dom';
 
 const Dashboard = (props: any) => {
+
+    const history = useHistory();
 
     const options = {
         ...props.dashState.chartOptions,
@@ -17,7 +20,8 @@ const Dashboard = (props: any) => {
     };
 
     const onBarClick = (index: number) => {
-        console.log('onBarClick', props.dashState.chartSeries[0].data[index]);
+        const country = props.dashState.chartSeries[0].data[index].x;
+        history.push('/details?country=' + encodeURIComponent(country));
     }
 
     useEffect(() => {

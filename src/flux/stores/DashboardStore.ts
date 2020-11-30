@@ -31,17 +31,6 @@ class DashboardStore extends ReduceStore<DashboardModel, Action> {
                     dState.chartDate = action.payload.chartDate;
                     dState.allData = action.payload.data;
                 });
-                // return {
-                //     ...state,
-                //     chartSeries: [
-                //         {
-                //             ...state.chartSeries[0],
-                //             data: AppUtils.formatForBarchart(action.payload.data)
-                //         }
-                //     ],
-                //     chartDate: action.payload.chartDate,
-                //     allData: action.payload.data
-                // };
             }
             default:
                 return state;

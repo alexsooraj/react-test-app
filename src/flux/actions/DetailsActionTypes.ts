@@ -1,0 +1,4 @@
+export enum DetailsActionTypes {
+    LOAD_DETAILS = "LOAD_DETAILS",
+    LOAD_DETAILS_COMPLETED = "LOAD_DETAILS_COMPLETED"
+}

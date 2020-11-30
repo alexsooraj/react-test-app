@@ -6,6 +6,7 @@ import { Login } from './ui/login/login';
 import LoginGuard from './guards/LoginGuard';
 import { AuthActions } from './flux/actions/AuthActions';
 import DashboardContainer from './flux/containers/DashboardContainer';
+import DetailsContainer from './flux/containers/DetailsContainer';
 
 function App(props: any) {
   const logout = () => {
@@ -13,7 +14,7 @@ function App(props: any) {
   }
   return (
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <a className="navbar-brand">App</a>
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ml-auto">
@@ -23,12 +24,15 @@ function App(props: any) {
           </ul>
         </div>
       </nav>
-      <BrowserRouter>
-        <Switch>
-          <LoginGuard path="/login" component={Login} {...props} />
-          <AuthGuard exact path="/" component={DashboardContainer} {...props} />
-        </Switch>
-      </BrowserRouter>
+      <div style={{ paddingTop: '20px' }}>
+        <BrowserRouter>
+          <Switch>
+            <LoginGuard path="/login" component={Login} {...props} />
+            <AuthGuard exact path="/" component={DashboardContainer} {...props} />
+            <AuthGuard exact path="/details" component={DetailsContainer} {...props} />
+          </Switch>
+        </BrowserRouter>
+      </div>
     </div >
   );
 }

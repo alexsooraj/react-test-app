@@ -1,3 +1,5 @@
 export enum TodoActionTypes {
-    
+    LOAD_TODOS = "LOAD_TODOS",
+    LOAD_TODOS_COMPLETED = "LOAD_TODOS_COMPLETED",
+    OPEN_TODO_DIALOG = "OPEN_TODO_DIALOG"
 }

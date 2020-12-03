@@ -28,7 +28,7 @@ class DashboardStore extends ReduceStore<DashboardModel, Action> {
             case DashboardActionTypes.LOAD_GRAPH_DATA_COMPLETED: {
                 return produce(state, dState => {
                     dState.chartSeries[0].data = AppUtils.formatForBarchart(action.payload.data);
-                    dState.chartDate = action.payload.chartDate;
+                    dState.chartLoading = false;
                     dState.allData = action.payload.data;
                 });
             }
@@ -38,8 +38,8 @@ class DashboardStore extends ReduceStore<DashboardModel, Action> {
     }
 
     private loadGraphData() {
-        APIUtil.get(APIEndpoints.CHARTS_DATA).then(result => {
-            DashboardActions.loadGraphDataCompleted(result.data, new Date(result.date));
+        APIUtil.get(APIEndpoints.TODOS).then(result => {
+            DashboardActions.loadGraphDataCompleted(result, new Date(result.date));
         })
     }
 }

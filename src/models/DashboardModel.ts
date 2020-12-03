@@ -11,12 +11,13 @@ export class DashboardModel {
         name: string,
         data: { x: any, y: any }[]
     }[]
-    chartDate?: Date;
+    chartLoading: boolean;
     allData: [];
     constructor() {
         this.chartSeries = [
             { name: 'Cases Reported', data: [] }
         ]
         this.allData = [];
+        this.chartLoading = true;
     }
 }

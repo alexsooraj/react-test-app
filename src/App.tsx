@@ -25,7 +25,7 @@ function App(props: any) {
             <div className="navbar-collapse collapse" id="navbarSupportedContent">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <NavLink className="nav-link pointer-link" activeClassName="active" to="/todo">Todo</NavLink>
+                  <NavLink className="nav-link pointer-link" activeClassName="active" to="/todo">All Todos</NavLink>
                 </li>
                 <li className="nav-item">
                   <a onClick={() => logout()} className="nav-link pointer-link">Logout ({props.authState.currentUser.userName})</a>

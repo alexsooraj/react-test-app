@@ -5,9 +5,11 @@ export class TodoViewModel {
     todos: TodoModel[];
     loading: boolean;
     currentTodo?: TodoModel;
+    saving: boolean;
     [immerable] = true;
     constructor() {
         this.todos = [];
         this.loading = false;
+        this.saving = false;
     }
 }

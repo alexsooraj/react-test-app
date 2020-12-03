@@ -1,4 +1,4 @@
-import { ItemModel } from "../../models/ItemModel";
+import { TodoModel } from "../../models/Todo";
 import AppDispatcher from "../dispatcher/AppDispatcher";
 import { DashboardActionTypes } from "./DashboardActionTypes";
 
@@ -8,7 +8,7 @@ export class DashboardActions {
             type: DashboardActionTypes.LOAD_GRAPH_DATA
         });
     }
-    static loadGraphDataCompleted(data: ItemModel[], chartDate: Date) {
+    static loadGraphDataCompleted(data: TodoModel[], chartDate: Date) {
         AppDispatcher.dispatch({
             type: DashboardActionTypes.LOAD_GRAPH_DATA_COMPLETED,
             payload: { data, chartDate }

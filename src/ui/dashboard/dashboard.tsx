@@ -21,7 +21,7 @@ const Dashboard = (props: any) => {
 
     const onBarClick = (index: number) => {
         const country = props.dashState.chartSeries[0].data[index].x;
-        history.push('/details?country=' + encodeURIComponent(country));
+        history.push('/todo?category=' + encodeURIComponent(country));
     }
 
     useEffect(() => {
@@ -34,8 +34,8 @@ const Dashboard = (props: any) => {
 
     return <div className="container">
         <div className="chart-border">
-            <h5>{props.dashState.chartDate === undefined ? 'Loading...' : 'Covid-19 (' + formatDate(props.dashState.chartDate) + ' - Snapshot)'}</h5>
-            {props.dashState.chartDate === undefined ? null : <Chart options={options} type='bar' series={props.dashState.chartSeries} />}
+            <h5>{props.dashState.chartLoading ? 'Loading...' : 'Things todo'}</h5>
+            {props.dashState.chartLoading? null : <Chart options={options} type='bar' series={props.dashState.chartSeries} />}
         </div>
     </div>
 }

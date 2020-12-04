@@ -3,9 +3,10 @@ import AppDispatcher from "../dispatcher/AppDispatcher";
 import { TodoActionTypes } from "./TodoActionTypes";
 
 export class TodoActions {
-    public static loadTodos() {
+    public static loadTodos(category?: string) {
         AppDispatcher.dispatch({
-            type: TodoActionTypes.LOAD_TODOS
+            type: TodoActionTypes.LOAD_TODOS,
+            payload: { category }
         });
     }
 

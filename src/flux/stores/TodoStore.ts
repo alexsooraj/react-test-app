@@ -22,7 +22,7 @@ class TodoStore extends ReduceStore<TodoViewModel, Action> {
     reduce(state: TodoViewModel, action: Action) {
         switch (action.type) {
             case TodoActionTypes.LOAD_TODOS: {
-                this.loadTodos();
+                this.loadTodos(action.payload.category);
                 return produce(state, dState => {
                     dState.loading = true;
                 });
@@ -83,15 +83,18 @@ class TodoStore extends ReduceStore<TodoViewModel, Action> {
         }
     }
 
-    private loadTodos() {
-        APIUtil.get(APIEndpoints.TODOS).then(result => {
+    private loadTodos(category?: string) {
+        let query = '';
+        if (category !== undefined) {
+            query = '?category=' + category;
+        }
+        APIUtil.get(APIEndpoints.TODOS + query).then(result => {
             TodoActions.loadTodosCompleted(result);
         })
     }
 
     private deleteTodo(todo?: TodoModel) {
-        console.log('todo', todo);
-        APIUtil.delete(APIEndpoints.TODOS, todo).then(res => {
+        APIUtil.delete(APIEndpoints.TODOS + '?id=' + todo?.id).then(res => {
             TodoActions.deleteTodoCompleted();
         });
     }

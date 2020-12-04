@@ -22,8 +22,8 @@ export class APIUtil {
         return result.data;
     }
 
-    static delete = async (url: string, data: any) => {
-        const result = await axios.delete(url, data);
+    static delete = async (url: string) => {
+        const result = await axios.delete(url);
         if (result.data.error !== undefined) {
             throw new Error(result.data.error);
         }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import { TodoActions } from '../../flux/actions/TodoActions';
 import { Categories } from '../../models/Categories';
 import { TodoModel } from '../../models/Todo';
@@ -7,9 +8,16 @@ import { TodoViewModel } from '../../models/TodoViewModel';
 import './todo.css';
 
 const TodoComponent = (props: any) => {
+    const history = useHistory();
     const [editMode, setEditMode] = useState(false);
+    const [currentCategory, setCurrentCategory] = useState('');
     useEffect(() => {
-        TodoActions.loadTodos();
+        const category = new URLSearchParams(history.location.search).get('category');
+        setCurrentCategory(category === null ? '' : category);
+        if (category !== null)
+            TodoActions.loadTodos(category);
+        else
+            TodoActions.loadTodos();
     }, []);
     const todoState: TodoViewModel = props.todoState;
     const openTodoDialog = (todoItem?: TodoModel) => {
@@ -32,7 +40,9 @@ const TodoComponent = (props: any) => {
         TodoActions.deleteTodo();
     }
     return <div className="todo-container">
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}><h4>Todo</h4><Button onClick={() => openTodoDialog()} variant="primary">+ Add todo</Button></div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}><div><h4>Todo</h4>
+            {currentCategory === '' ? null : <span className="badge badge-secondary">{currentCategory}</span>}
+        </div><Button onClick={() => openTodoDialog()} variant="primary">+ Add todo</Button></div>
         <div style={{ paddingTop: '15px' }}>
             {todoState.loading === true ? <div>Loading...</div> : <ul className="list-group">
                 {todoState.todos.map((todo, index) => <li onClick={() => { openTodoDialog(todo) }} className="list-group-item pointer-link" key={index}>{todo.title}</li>)}

@@ -19,6 +19,7 @@ const TodoComponent = (props: any) => {
         else
             TodoActions.loadTodos();
     }, []);
+
     const todoState: TodoViewModel = props.todoState;
     const openTodoDialog = (todoItem?: TodoModel) => {
         todoItem === undefined ? setEditMode(true) : setEditMode(false);

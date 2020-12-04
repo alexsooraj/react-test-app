@@ -28,10 +28,6 @@ const Dashboard = (props: any) => {
         DashboardActions.loadGraphData();
     }, []);
 
-    const formatDate = (date: Date) => {
-        return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
-    }
-
     return <div className="container">
         <div className="chart-border">
             <h5>{props.dashState.chartLoading ? 'Loading...' : 'Things todo'}</h5>

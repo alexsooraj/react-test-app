@@ -60,4 +60,11 @@ export class TodoActions {
             type: TodoActionTypes.DELETE_TODO_COMPLETED
         });
     }
+
+    public static setCurrentCategory(category: string) {
+        AppDispatcher.dispatch({
+            type: TodoActionTypes.SET_CURRENT_CATEGORY,
+            payload: { category }
+        });
+    }
 }

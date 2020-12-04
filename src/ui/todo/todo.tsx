@@ -10,7 +10,10 @@ import './todo.css';
 const TodoComponent = (props: any) => {
     const history = useHistory();
     const [editMode, setEditMode] = useState(false);
-    const [currentCategory, setCurrentCategory] = useState('');
+    // const [currentCategory, setCurrentCategory] = useState('');
+    const setCurrentCategory = (category: string) => {
+        TodoActions.setCurrentCategory(category);
+    }
     useEffect(() => {
         const category = new URLSearchParams(history.location.search).get('category');
         setCurrentCategory(category === null ? '' : category);
@@ -42,7 +45,7 @@ const TodoComponent = (props: any) => {
     }
     return <div className="todo-container">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}><div><h4>Todo</h4>
-            {currentCategory === '' ? null : <span className="badge badge-secondary">{currentCategory}</span>}
+            {todoState.currentCategory === '' ? null : <span className="badge badge-secondary">{todoState.currentCategory}</span>}
         </div><Button onClick={() => openTodoDialog()} variant="primary">+ Add todo</Button></div>
         <div style={{ paddingTop: '15px' }}>
             {todoState.loading === true ? <div>Loading...</div> : <ul className="list-group">

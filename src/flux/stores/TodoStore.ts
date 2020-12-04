@@ -22,7 +22,7 @@ class TodoStore extends ReduceStore<TodoViewModel, Action> {
     reduce(state: TodoViewModel, action: Action) {
         switch (action.type) {
             case TodoActionTypes.LOAD_TODOS: {
-                this.loadTodos(action.payload.category);
+                this.loadTodos(state.currentCategory === '' ? undefined : state.currentCategory);
                 return produce(state, dState => {
                     dState.loading = true;
                 });
@@ -76,6 +76,11 @@ class TodoStore extends ReduceStore<TodoViewModel, Action> {
                 setTimeout(() => TodoActions.loadTodos());
                 return produce(state, dState => {
                     dState.currentTodo = undefined;
+                });
+            }
+            case TodoActionTypes.SET_CURRENT_CATEGORY: {
+                return produce(state, dState => {
+                    dState.currentCategory = action.payload.category
                 });
             }
             default:

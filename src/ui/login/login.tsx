@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthActions } from '../../flux/actions/AuthActions';
 import { AuthData } from '../../models/AuthData';
 
@@ -14,6 +14,10 @@ export const Login = (props: any) => {
         event.preventDefault();
         AuthActions.login(userId, password);
     }
+
+    useEffect(() => {
+        console.log('process.env', process.env);
+    }, []);
 
     return <div className="login-container">
         <div className="form-container">

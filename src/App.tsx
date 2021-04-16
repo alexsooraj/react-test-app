@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Switch, NavLink } from "react-router-dom";
+import { BrowserRouter, Switch, NavLink, Redirect } from "react-router-dom";
 import AuthGuard from './guards/AuthGuard';
 import { Login } from './ui/login/login';
 import LoginGuard from './guards/LoginGuard';
@@ -39,6 +39,7 @@ function App(props: any) {
             <AuthGuard exact path="/" component={DashboardContainer} {...props} />
             <AuthGuard exact path="/details" component={DetailsContainer} {...props} />
             <AuthGuard exact path="/todo" component={TodoContainer} {...props} />
+            <Redirect from="*" to="/" />
           </Switch>
         </div>
       </BrowserRouter>
